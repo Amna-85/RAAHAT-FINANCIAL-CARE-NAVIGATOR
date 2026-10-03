@@ -1,0 +1,230 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>RAAHAT — Financial Care Navigator</title>
+<style>
+:root{--g:#116b5a;--gl:#e8f5f1;--ink:#172329;--mut:#68767d;--line:#dfe7e8;--bg:#f4f7f7;--red:#b7473e;--white:#fff}
+*{box-sizing:border-box}body{margin:0;background:#dfe7e8;font-family:Inter,system-ui,-apple-system,Segoe UI,Arial,sans-serif;color:var(--ink)}
+button,input{font:inherit}.app{width:390px;min-height:844px;margin:18px auto;background:var(--bg);border-radius:34px;overflow:hidden;position:relative;box-shadow:0 24px 70px #0003}
+.top{height:72px;background:#fff;padding:14px 18px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--line)}
+.brand{font-size:25px;font-weight:950;letter-spacing:-1px;color:var(--g)}.sub{font-size:9px;color:var(--mut);font-weight:850;letter-spacing:.5px}
+.lang{border:1px solid var(--line);background:#fff;border-radius:18px;padding:8px 11px;font-size:11px;font-weight:850;cursor:pointer}
+.page{padding:18px 18px 100px;display:none}.page.active{display:block}
+.hero{background:var(--g);color:#fff;border-radius:25px;padding:23px 20px}.hero .ey{font-size:10px;opacity:.82;font-weight:850;text-transform:uppercase;letter-spacing:1px}.hero h1{font-size:28px;line-height:1.08;margin:9px 0}.hero p{line-height:1.5;color:#ddf1eb;margin:0}
+.inputbox{margin:15px 0;background:#fff;border:1px solid #d9e7e3;border-radius:22px;padding:15px}
+.inputlabel{font-size:10px;text-transform:uppercase;letter-spacing:.7px;color:var(--mut);font-weight:900;margin-bottom:9px}
+textarea{width:100%;min-height:76px;border:1px solid var(--line);border-radius:14px;padding:11px;resize:none;outline:none;font-size:13px;background:#fafcfc}
+.controls{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin-top:9px}.btn{border:0;border-radius:14px;padding:12px 14px;font-weight:900;cursor:pointer}.primary{background:var(--g);color:#fff}.secondary{background:var(--gl);color:var(--g)}.full{width:100%}
+.voicebar{margin-top:10px;background:#f0f6f4;border-radius:15px;padding:10px;font-size:11px;color:var(--g);font-weight:800;display:flex;justify-content:space-between;align-items:center}
+.mic{width:62px;height:62px;border-radius:50%;background:var(--g);color:#fff;display:grid;place-items:center;margin:0 auto 10px;font-size:28px;box-shadow:0 0 0 9px var(--gl);cursor:pointer}.voice{text-align:center;padding:9px 0 3px}
+.card{background:#fff;border:1px solid #e4eaeb;border-radius:20px;padding:16px;margin:11px 0;box-shadow:0 5px 18px #00000009}.label{font-size:10px;text-transform:uppercase;letter-spacing:.6px;color:var(--mut);font-weight:900}.big{font-size:24px;font-weight:950;line-height:1.14;margin:7px 0}.mut{color:var(--mut);line-height:1.5;font-size:13px}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:10px}.choice{background:#fff;border:1px solid var(--line);border-radius:17px;padding:15px;text-align:left;cursor:pointer}.choice .ico{font-size:24px}.choice b{display:block;margin:7px 0 4px}.choice small{color:var(--mut)}
+.money{font-size:34px;font-weight:950;color:var(--g)}.gap{font-size:34px;font-weight:950;color:var(--red)}.bar{height:9px;background:#e4ebec;border-radius:10px;overflow:hidden;margin-top:10px}.bar i{display:block;width:19%;height:100%;background:var(--g)}
+.path{display:grid;grid-template-columns:34px 1fr auto;gap:10px;align-items:start}.num{width:30px;height:30px;border-radius:50%;background:var(--gl);color:var(--g);display:grid;place-items:center;font-weight:950}.path h3{margin:1px 0 5px;font-size:15px}.source{border-top:1px solid var(--line);margin-top:12px;padding-top:10px;color:var(--mut);font-size:10px;line-height:1.45}
+.quote{background:#f0f5f5;border-radius:18px;padding:15px;font-size:14px;line-height:1.55}.safe{background:#eef4f4;border-radius:15px;padding:12px;font-size:10px;line-height:1.45;color:#536167}
+.record{background:#172329;color:#fff;border-radius:20px;padding:17px}.wave{height:28px;display:flex;gap:4px;align-items:center;margin-bottom:10px}.wave i{display:block;width:4px;background:#d7eee8;border-radius:4px;height:10px}.wave i:nth-child(2){height:19px}.wave i:nth-child(3){height:27px}.wave i:nth-child(4){height:15px}.wave i:nth-child(5){height:23px}.wave i:nth-child(6){height:12px}.wave i:nth-child(7){height:20px}
+.bottom{position:absolute;left:0;right:0;bottom:0;height:66px;background:#fff;border-top:1px solid var(--line);display:grid;grid-template-columns:repeat(4,1fr);z-index:10}.nav{text-align:center;padding-top:9px;font-size:9px;color:var(--mut);font-weight:800;cursor:pointer}.nav b{display:block;font-size:19px;line-height:22px}.nav.active{color:var(--g)}
+.modal{position:absolute;inset:0;background:#0007;display:none;align-items:flex-end;z-index:50}.modal.open{display:flex}.sheet{background:#fff;border-radius:25px 25px 0 0;padding:22px 18px 26px;width:100%;max-height:78%;overflow:auto}.x{float:right;border:0;background:#f1f4f4;border-radius:50%;width:30px;height:30px;font-size:20px;cursor:pointer}.sheet h2{margin:4px 0 8px}.tiny{font-size:10px;color:var(--mut);line-height:1.5}
+.toggle{display:flex;background:#eef4f4;border-radius:13px;padding:4px;margin-bottom:12px}.toggle button{flex:1;border:0;background:transparent;border-radius:10px;padding:9px;font-size:11px;font-weight:900;cursor:pointer;color:var(--mut)}.toggle button.on{background:#fff;color:var(--g);box-shadow:0 2px 7px #00000012}
+.toast{position:absolute;left:18px;right:18px;bottom:78px;background:#172329;color:#fff;padding:13px;border-radius:15px;text-align:center;font-size:11px;z-index:60}
+@media(max-width:430px){body{background:var(--bg)}.app{margin:0;width:100%;border-radius:0;min-height:100vh}}
+</style>
+</head>
+<body>
+<div class="app">
+<div class="top">
+  <div><div class="brand">RAAHAT</div><div class="sub" data-en="FINANCIAL CARE NAVIGATOR" data-ur="صحت اور مالی مدد کا رہنما">FINANCIAL CARE NAVIGATOR</div></div>
+  <button class="lang" onclick="openLang()">اردو / EN</button>
+</div>
+
+<section class="page active" id="p1">
+  <div class="hero">
+    <div class="ey" data-en="Voice + text. Your choice." data-ur="آواز یا متن — آپ کی مرضی">Voice + text. Your choice.</div>
+    <h1 data-en="Healthcare shouldn't become a financial maze." data-ur="علاج مالی پریشانی کی بھول بھلیاں نہیں بننا چاہیے۔">Healthcare shouldn't become a financial maze.</h1>
+    <p data-en="Tell RAAHAT what happened and what you can afford. You can speak or type — in simple language." data-ur="RAAHAT کو بتائیں کیا ہوا اور آپ کتنا خرچ کر سکتے ہیں۔ آپ آسان زبان میں بول بھی سکتے ہیں اور لکھ بھی سکتے ہیں۔">Tell RAAHAT what happened and what you can afford. You can speak or type — in simple language.</p>
+  </div>
+
+  <div class="inputbox">
+    <div class="inputlabel" data-en="Tell us what you need" data-ur="اپنی صورتحال بتائیں">Tell us what you need</div>
+    <textarea id="story" data-placeholder-en="Example: Doctor said my mother needs an operation. It costs Rs. 80,000 and we have Rs. 15,000." data-placeholder-ur="مثال: ڈاکٹر نے کہا ہے کہ میری امی کا آپریشن ہونا ہے۔ خرچ 80 ہزار ہے اور ہمارے پاس 15 ہزار ہیں۔" placeholder="Example: Doctor said my mother needs an operation. It costs Rs. 80,000 and we have Rs. 15,000."></textarea>
+    <div class="controls">
+      <button class="btn secondary" onclick="startVoice()">🎙 <span data-en="Speak" data-ur="بولیں">Speak</span></button>
+      <button class="btn primary" onclick="submitStory()">➜ <span data-en="Continue" data-ur="جاری رکھیں">Continue</span></button>
+    </div>
+    <div class="voicebar"><span id="voiceStatus" data-en="Voice and typing are both available." data-ur="آپ آواز یا ٹائپنگ، دونوں استعمال کر سکتے ہیں۔">Voice and typing are both available.</span><button class="btn secondary" style="padding:7px 9px" onclick="speakCurrent()">🔊</button></div>
+  </div>
+
+  <div class="card">
+    <div class="label" data-en="Designed to reduce barriers" data-ur="رکاوٹیں کم کرنے کے لیے">Designed to reduce barriers</div>
+    <p class="mut" data-en="No English required. No complex forms. No need to type if you prefer speaking." data-ur="انگریزی ضروری نہیں۔ پیچیدہ فارم نہیں۔ اگر چاہیں تو ٹائپ کرنے کی ضرورت بھی نہیں۔">No English required. No complex forms. No need to type if you prefer speaking.</p>
+  </div>
+
+  <button class="btn secondary full" onclick="openHelp()">👨‍👩‍👧 <span data-en="I'm helping a family member" data-ur="میں گھر کے کسی فرد کی مدد کر رہا/رہی ہوں">I'm helping a family member</span></button>
+</section>
+
+<section class="page" id="p2">
+  <div class="label" data-en="RAAHAT heard" data-ur="RAAHAT نے سمجھا">RAAHAT heard</div>
+  <div class="big" data-en="Is this what you meant?" data-ur="کیا آپ یہی کہنا چاہتے تھے؟">Is this what you meant?</div>
+  <div class="record">
+    <div class="wave"><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+    <div id="heard">“Doctor ne meri ammi ka operation bola hai. Operation 80 hazaar ka hai. Mere paas 15 hazaar hain.”</div>
+    <div style="margin-top:10px;font-size:10px;opacity:.7" data-en="Voice/text input • understood" data-ur="آواز/متن • سمجھ لیا گیا">Voice/text input • understood</div>
+  </div>
+  <div class="card"><div class="label" data-en="Detected situation" data-ur="سمجھی گئی صورتحال">Detected situation</div>
+    <div class="grid2" style="margin-top:10px">
+      <div><b>🏥 <span data-en="Treatment" data-ur="علاج">Treatment</span></b><br><span class="mut" data-en="Surgery" data-ur="آپریشن">Surgery</span></div>
+      <div><b>💰 <span data-en="Budget" data-ur="بجٹ">Budget</span></b><br><span class="mut">Rs. 15,000</span></div>
+    </div>
+  </div>
+  <div class="grid2">
+    <button class="choice" onclick="go(1)">🔁<b data-en="Change it" data-ur="درست کریں">Change it</b><small data-en="Speak or type again" data-ur="دوبارہ بولیں یا لکھیں">Speak or type again</small></button>
+    <button class="choice" onclick="go(3)">👍<b data-en="Yes, continue" data-ur="ہاں، جاری رکھیں">Yes, continue</b><small data-en="Build my path" data-ur="میرا راستہ بنائیں">Build my path</small></button>
+  </div>
+  <button class="btn secondary full" style="margin-top:10px" onclick="speakHeard()">🔊 <span data-en="Read this aloud" data-ur="یہ آواز میں سنائیں">Read this aloud</span></button>
+</section>
+
+<section class="page" id="p3">
+  <div class="label" data-en="Step 1 of 3" data-ur="مرحلہ 1 از 3">Step 1 of 3</div>
+  <div class="big" data-en="Understand the affordability gap" data-ur="علاج کے خرچ اور بجٹ کا فرق سمجھیں">Understand the affordability gap</div>
+  <div class="card"><div class="label" data-en="Stated treatment cost" data-ur="بتائی گئی علاج کی لاگت">Stated treatment cost</div><div class="money">Rs. 80,000</div></div>
+  <div class="card"><div class="label" data-en="Family's available budget" data-ur="خاندان کا دستیاب بجٹ">Family's available budget</div><div class="money">Rs. 15,000</div></div>
+  <div class="card"><div class="label" data-en="Potential gap" data-ur="ممکنہ کمی">Potential gap</div><div class="gap">Rs. 65,000</div><div class="bar"><i></i></div><p class="mut" data-en="The family can currently cover about 19% of the stated cost." data-ur="خاندان فی الحال بتائی گئی لاگت کا تقریباً 19٪ پورا کر سکتا ہے۔">The family can currently cover about 19% of the stated cost.</p></div>
+  <button class="btn primary full" onclick="go(4)" data-en="Find possible pathways →" data-ur="ممکنہ راستے تلاش کریں →">Find possible pathways →</button>
+  <div class="safe" style="margin-top:12px" data-en="RAAHAT does not diagnose or decide whether treatment is medically necessary. It works from information provided by the patient/caregiver." data-ur="RAAHAT تشخیص نہیں کرتا اور نہ یہ فیصلہ کرتا ہے کہ علاج طبی طور پر ضروری ہے یا نہیں۔ یہ مریض یا مدد کرنے والے کی فراہم کردہ معلومات پر کام کرتا ہے۔">RAAHAT does not diagnose or decide whether treatment is medically necessary. It works from information provided by the patient/caregiver.</div>
+</section>
+
+<section class="page" id="p4">
+  <div class="label" data-en="Step 2 of 3" data-ur="مرحلہ 2 از 3">Step 2 of 3</div>
+  <div class="big" data-en="Your RAAHAT Path" data-ur="آپ کا RAAHAT راستہ">Your RAAHAT Path</div>
+  <p class="mut" data-en="Not a directory. A sequence of actions." data-ur="یہ صرف فہرست نہیں۔ یہ کام کرنے کے مراحل ہیں۔">Not a directory. A sequence of actions.</p>
+
+  <div class="card"><div class="path"><div class="num">1</div><div><h3 data-en="Get a written treatment estimate" data-ur="علاج کی تحریری لاگت لیں">Get a written treatment estimate</h3><p class="mut" data-en="Ask the treating facility for the expected cost and recommended procedure." data-ur="علاج کرنے والے ادارے سے متوقع خرچ اور تجویز کردہ طریقہ تحریری طور پر لیں۔">Ask the treating facility for the expected cost and recommended procedure.</p></div></div></div>
+
+  <div class="card"><div class="path"><div class="num">2</div><div><h3 data-en="Check potential medical assistance" data-ur="ممکنہ طبی مالی مدد دیکھیں">Check potential medical assistance</h3><p class="mut" data-en="RAAHAT can surface relevant programs and explain their requirements in simple language." data-ur="RAAHAT متعلقہ پروگرام سامنے لا سکتا ہے اور ان کی شرائط آسان زبان میں سمجھا سکتا ہے۔">RAAHAT can surface relevant programs and explain their requirements in simple language.</p></div><div>🤝</div></div>
+    <div class="source" data-en="Example verified source in this prototype: Pakistan Bait-ul-Mal medical assistance. Eligibility and current rules must be checked before applying." data-ur="اس پروٹوٹائپ میں مثال کے طور پر تصدیق شدہ ذریعہ: پاکستان بیت المال کی طبی امداد۔ درخواست سے پہلے اہلیت اور موجودہ قواعد کی تصدیق ضروری ہے۔">Example verified source in this prototype: Pakistan Bait-ul-Mal medical assistance. Eligibility and current rules must be checked before applying.</div>
+    <button class="btn secondary full" style="margin-top:11px" onclick="openSource()" data-en="See source & requirements" data-ur="ذریعہ اور شرائط دیکھیں">See source & requirements</button>
+  </div>
+
+  <div class="card"><div class="path"><div class="num">3</div><div><h3 data-en="Prepare documents" data-ur="دستاویزات تیار کریں">Prepare documents</h3><p class="mut" data-en="Prescription/recommendation, written estimate and identity documents may be required depending on the program." data-ur="پروگرام کے مطابق نسخہ/ڈاکٹر کی سفارش، تحریری تخمینہ اور شناختی دستاویزات درکار ہو سکتی ہیں۔">Prescription/recommendation, written estimate and identity documents may be required depending on the program.</p></div><div>📄</div></div></div>
+
+  <div class="card"><div class="label" data-en="Next action" data-ur="اگلا قدم">Next action</div><p class="mut" data-en="Ask the hospital for the written treatment estimate first." data-ur="سب سے پہلے ہسپتال سے علاج کی تحریری لاگت لیں۔">Ask the hospital for the written treatment estimate first.</p><button class="btn primary full" onclick="speakNext()">🔊 <span data-en="Hear the next step" data-ur="اگلا قدم سنیں">Hear the next step</span></button></div>
+</section>
+
+<section class="page" id="p5">
+  <div class="label" data-en="Step 3 of 3" data-ur="مرحلہ 3 از 3">Step 3 of 3</div>
+  <div class="big" data-en="Make it understandable" data-ur="سب کچھ آسان زبان میں سمجھیں">Make it understandable</div>
+  <div class="card"><div class="label" data-en="RAAHAT can explain aloud" data-ur="RAAHAT آواز میں سمجھا سکتا ہے">RAAHAT can explain aloud</div><div class="quote" id="spokenQuote">“Aap pehle hospital se written estimate lein. Is ke baad hum dekh sakte hain ke kaun se madad ke raaste aap ke liye mumkin hain.”</div><button class="btn secondary full" style="margin-top:10px" onclick="speakNext()">🔊 <span data-en="Play voice" data-ur="آواز چلائیں">Play voice</span></button></div>
+  <div class="card"><div class="label" data-en="Text remains available" data-ur="متن بھی موجود رہے گا">Text remains available</div><p class="mut" data-en="People can listen, read, or ask a family member/caregiver to help. The user does not have to depend on English text." data-ur="صارف سن سکتا ہے، پڑھ سکتا ہے، یا خاندان کے کسی فرد/مددگار سے مدد لے سکتا ہے۔ انگریزی متن پر انحصار ضروری نہیں۔">People can listen, read, or ask a family member/caregiver to help. The user does not have to depend on English text.</p></div>
+  <div class="safe">🚑 <b data-en="Emergency:" data-ur="ایمرجنسی:">Emergency:</b> <span data-en="RAAHAT is not an emergency service. Seek urgent medical care when needed." data-ur="RAAHAT ایمرجنسی سروس نہیں ہے۔ ضرورت ہو تو فوری طبی مدد حاصل کریں۔">RAAHAT is not an emergency service. Seek urgent medical care when needed.</span></div>
+</section>
+
+<div class="bottom">
+  <div class="nav active" onclick="go(1)"><b>⌂</b><span data-en="Home" data-ur="ہوم">Home</span></div>
+  <div class="nav" onclick="startVoice()"><b>🎙</b><span data-en="Voice" data-ur="آواز">Voice</span></div>
+  <div class="nav" onclick="openScan()"><b>📷</b><span data-en="Scan" data-ur="اسکین">Scan</span></div>
+  <div class="nav" onclick="openHelp()"><b>👥</b><span data-en="Help" data-ur="مدد">Help</span></div>
+</div>
+
+<div class="modal" id="modal"><div class="sheet"><button class="x" onclick="closeM()">×</button><div id="mcontent"></div></div></div>
+</div>
+
+<script>
+let language='en';
+const app=document.querySelector('.app');
+
+function go(n){
+ document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+ document.getElementById('p'+n).classList.add('active');
+ document.querySelectorAll('.nav').forEach(x=>x.classList.remove('active'));
+ if(n===1)document.querySelector('.nav').classList.add('active');
+ window.scrollTo(0,0);
+}
+function setLanguage(l){
+ language=l;
+ document.documentElement.lang=l==='ur'?'ur':'en';
+ document.querySelectorAll('[data-en]').forEach(el=>{el.textContent=el.dataset[l]||el.dataset.en});
+ const ta=document.getElementById('story');
+ ta.placeholder=ta.dataset['placeholder-'+l];
+ closeM();
+ toast(l==='ur'?'زبان اردو کر دی گئی ہے':'Language changed to English');
+}
+function openLang(){
+ document.getElementById('mcontent').innerHTML=`
+ <h2>🌐 ${language==='ur'?'زبان منتخب کریں':'Choose language'}</h2>
+ <p class="mut">${language==='ur'?'RAAHAT متن اور آواز دونوں میں زبان بدل سکتا ہے۔':'RAAHAT can switch both text and voice.'}</p>
+ <div class="grid2">
+  <button class="choice" onclick="setLanguage('ur')">🇵🇰<b>اردو</b><small>متن + آواز</small></button>
+  <button class="choice" onclick="setLanguage('en')">🇬🇧<b>English</b><small>Text + voice</small></button>
+ </div>
+ <p class="tiny">${language==='ur'?'بعد میں پنجابی، سندھی، پشتو اور دیگر زبانیں شامل کی جا سکتی ہیں۔':'More Pakistani languages can be added later.'}</p>`;
+ document.getElementById('modal').classList.add('open');
+}
+function openHelp(){
+ document.getElementById('mcontent').innerHTML=`
+ <h2>👥 ${language==='ur'?'خاندان کے فرد کی مدد':'Helping someone'}</h2>
+ <p class="mut">${language==='ur'?'اگر مریض خود ایپ استعمال نہیں کر سکتا تو بیٹا، بیٹی، رشتہ دار یا کمیونٹی ورکر اس کی طرف سے RAAHAT چلا سکتا ہے۔ مریض اپنی بات آواز میں بتا سکتا ہے۔':'If the patient cannot use the app alone, a son, daughter, relative or community worker can operate RAAHAT for them. The patient can still answer by voice.'}</p>
+ <div class="card"><b>🗣️ ${language==='ur'?'مریض بولتا ہے':'Patient speaks'}</b><p class="mut">${language==='ur'?'مریض کو ٹائپ کرنے کی ضرورت نہیں۔':'The patient does not need to type.'}</p></div>
+ <div class="card"><b>📷 ${language==='ur'?'مددگار دستاویز کی تصویر لیتا ہے':'Helper captures documents'}</b><p class="mut">${language==='ur'?'مددگار نسخے، تخمینے یا دیگر کاغذات کی تصویر لے سکتا ہے۔':'The helper can capture prescriptions, estimates or other documents.'}</p></div>
+ <button class="btn primary full" onclick="closeM();toast('${language==='ur'?'Assisted mode شروع ہوگیا':'Assisted mode enabled'}')">${language==='ur'?'اس طریقے سے جاری رکھیں':'Use assisted mode'}</button>`;
+ document.getElementById('modal').classList.add('open');
+}
+function openSource(){
+ document.getElementById('mcontent').innerHTML=`
+ <h2>🤝 ${language==='ur'?'مثال: طبی مالی مدد':'Example: medical assistance'}</h2>
+ <p class="mut">${language==='ur'?'پاکستان بیت المال کا Individual Financial Assistance (Medical) پروگرام اہل افراد کے لیے طبی مالی مدد فراہم کرتا ہے، اس کی اپنی اہلیت اور طریقہ کار کے مطابق۔':'Pakistan Bait-ul-Mal’s Individual Financial Assistance (Medical) program provides medical financial assistance to eligible people, subject to its criteria and process.'}</p>
+ <div class="card"><b>${language==='ur'?'اہم':'Important'}</b><p class="mut">${language==='ur'?'RAAHAT امداد کی ضمانت نہیں دیتا۔ موجودہ اہلیت اور قواعد درخواست سے پہلے تصدیق کیے جائیں گے۔':'RAAHAT does not guarantee funding. Current eligibility and rules must be verified before applying.'}</p></div>
+ <button class="btn secondary full" onclick="closeM()">${language==='ur'?'بند کریں':'Close'}</button>`;
+ document.getElementById('modal').classList.add('open');
+}
+function openScan(){
+ document.getElementById('mcontent').innerHTML=`
+ <h2>📷 ${language==='ur'?'دستاویز اسکین':'Document scan'}</h2>
+ <p class="mut">${language==='ur'?'صارف نسخے یا ہسپتال کے تخمینے کی تصویر لے سکتا ہے۔ AI بعد میں اہم معلومات نکالنے میں مدد کرے گا۔':'The user can photograph a prescription or hospital estimate. AI can then help extract relevant information.'}</p>
+ <button class="btn primary full" onclick="closeM();toast('${language==='ur'?'Demo: دستاویز محفوظ ہوگئی':'Demo: document captured'}')">${language==='ur'?'تصویر لیں':'Take photo'}</button>`;
+ document.getElementById('modal').classList.add('open');
+}
+function closeM(){document.getElementById('modal').classList.remove('open')}
+function submitStory(){
+ const text=document.getElementById('story').value.trim();
+ if(!text){toast(language==='ur'?'پہلے اپنی صورتحال بتائیں':'Tell us your situation first');return}
+ document.getElementById('heard').textContent='“'+text+'”';
+ go(2);
+}
+function startVoice(){
+ const SpeechRecognition=window.SpeechRecognition||window.webkitSpeechRecognition;
+ if(!SpeechRecognition){
+   document.getElementById('story').value=language==='ur'?'میری امی کا آپریشن ہے۔ خرچ 80 ہزار ہے اور میرے پاس 15 ہزار ہیں۔':'Doctor said my mother needs an operation. It costs Rs. 80,000 and we have Rs. 15,000.';
+   toast(language==='ur'?'Demo voice مثال شامل کر دی گئی ہے':'Demo voice example inserted');
+   return;
+ }
+ const r=new SpeechRecognition();
+ r.lang=language==='ur'?'ur-PK':'en-US';r.interimResults=false;r.maxAlternatives=1;
+ toast(language==='ur'?'بولنا شروع کریں…':'Start speaking…');
+ r.onresult=e=>{document.getElementById('story').value=e.results[0][0].transcript;toast(language==='ur'?'آواز متن میں بدل دی گئی ہے':'Voice converted to text')};
+ r.onerror=()=>toast(language==='ur'?'آواز دستیاب نہیں، ٹائپنگ استعمال کریں':'Voice unavailable; use typing');
+ r.start();
+}
+function speak(text){
+ if(!('speechSynthesis' in window)){toast(language==='ur'?'اس براؤزر میں آواز دستیاب نہیں':'Voice playback is unavailable in this browser');return}
+ speechSynthesis.cancel();
+ const u=new SpeechSynthesisUtterance(text);
+ u.lang=language==='ur'?'ur-PK':'en-US';u.rate=.92;speechSynthesis.speak(u);
+}
+function speakCurrent(){
+ const text=language==='ur'?'آپ آواز یا ٹائپنگ، دونوں استعمال کر سکتے ہیں۔':'Voice and typing are both available.';
+ speak(text);
+}
+function speakHeard(){
+ const text=document.getElementById('heard').textContent.replace(/[“”]/g,'');
+ speak(text);
+}
+function speakNext(){
+ const text=language==='ur'?'سب سے پہلے ہسپتال سے علاج کی تحریری لاگت لیں۔ اس کے بعد ممکنہ مالی مدد کے راستے دیکھیں۔':'First, ask the hospital for the written treatment estimate. Then check possible financial assistance pathways.';
+ speak(text);
+}
+function toast(t){let x=document.createElement('div');x.className='toast';x.textContent=t;app.appendChild(x);setTimeout(()=>x.remove(),1900)}
+</script>
+</body>
+</html>
